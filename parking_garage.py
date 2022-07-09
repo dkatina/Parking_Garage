@@ -19,11 +19,31 @@ class Tracking():
 
     def __init__(self):
         self.time = 0.0
+        self.price = self.time * 5.25
+
 
     def spots_available(self):
         pass
+
     def take_ticket(self, time):
-        pass                        #remove 1 spot add ticket takes
+        os.system('cls' if os.name == 'nt' else 'clear')
+        self.price = self.time * 5.25
+        time = True
+        while time:
+            if self.time > 0:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(f"\nTicket price is: ${self.price}")
+                p = input("\nHow long will u be parked for? ").lower()
+            elif self.time == 0:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(f"\nTicket price is: ${self.price}")
+                p = input("\nNo Entry allowed").lower()
+                time = False
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("Please select a valid payment method.....idiot")
+
+                                           #remove 1 spot add ticket takes
     def pay_ticket(self):
         os.system('cls' if os.name == 'nt' else 'clear')
         price = self.time * 5.25
@@ -47,17 +67,17 @@ dylan = Tracking()
 dylan.pay_ticket()
 
 
-# class ParkingGarage():    
-#     tracking = Tracking()
+class ParkingGarage():    
+     tracking = Tracking()
 
-#     def enter_garage(cls):
-#         if cls.spots_available():
-#             time = int(input("How many hours will you be parked? "))
-#             cls.take_ticket(time)
-#         else:
-#             print("Sorry all full. Come back later.")
+     def enter_garage(cls):
+         if cls.spots_available():
+             time = int(input("How many hours will you be parked? "))
+             cls.take_ticket(time)
+         else:
+             print("Sorry all full. Come back later.")
 
-#     def leave_garage(cls):
-#         cls.payticket()
+     def leave_garage(cls):
+         cls.payticket()
 
 
