@@ -42,7 +42,7 @@ or they can shut the kiosk down, wiping the data from the day
 
 ## Work Division
 
-###Together
+### Together
 (Done on the first night over zoom screenshare)
 Built out the general flow and functonality of the kiosk defining core:   
 Classes
