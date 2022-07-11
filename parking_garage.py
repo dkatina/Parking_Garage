@@ -1,27 +1,13 @@
 from http.client import PAYMENT_REQUIRED
 import os
 
-# Define parking spots
 
-#   If spots available
-# Take ticket decrese parking spots
-#   If full
-#Goodbye
 
-#  **track ticket time**
-
-#  pay ticket 
-
-# parking spost + 1
-
+#---------------------------Ticket-Tracking-----------------------
 
 class Tracking():
     garage = {'spots': 3, 'tickets_taken': 0, 'profit': 0}
     current_tickets = {}    #Store ticket number and time
-
-    def __init__(self):
-        self.time = 0.0
-        self.ticket = 0
 
     def spots_available(self):
         if self.garage['spots'] > 0:
@@ -115,57 +101,12 @@ class Tracking():
     def get_spots(cls):
         return cls.garage['spots']
 
-    
+#---------------------Portal----------------------------    
 
+class Portal():
 
-class ParkingGarage():    
     tracking = Tracking()
-    active = True
-    @classmethod
-    def main(cls):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        while cls.active:
-            option = input("""
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        Welcome to D&G Tiny Parking 
 
-Are You Entering - Leaving - Management 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                :""").lower()
-            if option == 'entering':
-                cls.enter_garage()
-            elif option == 'leaving':
-                cls.leave_garage()
-            elif option == 'management':
-                cls.manager_portal()
-            else:
-                print('Invalid option please try again.')
-    @classmethod
-    def enter_garage(cls):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        if cls.tracking.spots_available():
-            spots = cls.tracking.get_spots()
-            print(f"\nWonderful, we have {spots} spot{'s' if spots > 1 else ''} available.")
-            time = int(input("\n\nHow many hours will you be parked? "))
-            cls.tracking.take_ticket(time)
-        else:
-            print("Sorry all full. Come back later.")
-    @classmethod
-    def leave_garage(cls):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        ticket_number = int(input("What is your ticket number? "))
-        if ticket_number in Tracking.current_tickets:
-            cls.tracking.pay_ticket(ticket_number)
-        else:
-            print("Invalid ticket number!")
-            lost = input("Did you lose your ticket?: Yes/No ").lower()
-            if lost == 'yes':
-                cls.tracking.pay_max()
-            else:
-                cls.leave_garage()
-    
-    @classmethod
     def manager_portal(cls):
         managing = True
         while managing:
@@ -197,14 +138,67 @@ Close Up
             else:
                 print("Invalid Selection")
             if managing:
-                another = input("Would you like to check something else: Yes/No ").lower()
+                another = input("\nWould you like to check something else: Yes/No ").lower()
                 if another == 'no':
                     managing = False
                     print("Have a nice day!")
 
-                
 
+#-------------------------------Main UI--------------------------------
 
+class ParkingGarage():    
+    tracking = Tracking()
+    portal = Portal()
+    active = True
+    @classmethod
+    def main(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        while cls.active:
+            option = input("""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Welcome to D&G Tiny Parking 
+
+Are You Entering - Leaving - Management 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                :""").lower()
+            if option == 'entering':
+                cls.enter_garage()
+            elif option == 'leaving':
+                cls.leave_garage()
+            elif option == 'management':
+                pw = int(input("What is your manager code?: "))
+                if pw == 1234:
+                    cls.portal.manager_portal()
+                else:
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    print("\nInvalid code!")
+                    print("\nBeat it Pal!")
+            else:
+                print('Invalid option please try again.')
+    @classmethod
+    def enter_garage(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if cls.tracking.spots_available():
+            spots = cls.tracking.get_spots()
+            print(f"\nWonderful, we have {spots} spot{'s' if spots > 1 else ''} available.")
+            time = int(input("\n\nHow many hours will you be parked? "))
+            cls.tracking.take_ticket(time)
+        else:
+            print("Sorry all full. Come back later.")
+    @classmethod
+    def leave_garage(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        ticket_number = int(input("What is your ticket number? "))
+        if ticket_number in Tracking.current_tickets:
+            cls.tracking.pay_ticket(ticket_number)
+        else:
+            print("Invalid ticket number!")
+            lost = input("Did you lose your ticket?: Yes/No ").lower()
+            if lost == 'yes':
+                cls.tracking.pay_max()
+            else:
+                cls.leave_garage()
 
 
 if __name__ == '__main__':
