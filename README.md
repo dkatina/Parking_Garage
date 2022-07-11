@@ -42,6 +42,26 @@ or they can shut the kiosk down, wiping the data from the day
 
 ## Work Division
 
+###Together
+(Done on the first night over zoom screenshare)
+Built out the general flow and functonality of the kiosk defining core:   
+Classes
+functions
+class variables and instance variables
 
+The three main functions were to check spots_available(Checks if there are spots), take_ticket(Issues a ticket), pay_ticket(Pay ticket and leave)
 
+They built out the pay_ticket function together and then made their first commit.
+
+### Gio Marchiori
+
+Gio built out another one of the three core functions, the Take_Ticket, and commited it to the main branch
+
+### Dylan Katina
+
+Polished the main functionality so that everything was working in tandem.   
+Once the machine fulfilled all the basic functionality required by the assignment, got spicy and added:   
+-lost ticket sequence   
+-acknowledgement of fine incurred due to lost ticket
+-Manager portal and it's subsequent functions
 
